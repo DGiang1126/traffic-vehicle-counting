@@ -54,37 +54,73 @@ Chứa dữ liệu đầu vào của project.
 
 ### `data/videos/development/`
 
-Chứa video dùng trong quá trình phát triển:
+Chứa video dùng để phát triển, debug và thử Detection, Tracking, Counting trước khi chạy evaluation chính thức.
 
-- viết và debug code;
-- thử model, tracker, counting line/zone;
-- kiểm tra các module trước khi chạy chính thức.
-
-Video development có thể ngắn và được sử dụng nhiều lần.
-
-Ví dụ:
+Hiện folder đã có đủ các dạng luồng giao thông cần thiết:
 
 ```text
-dev_01_detrac_MVI_20011.mp4
-dev_02_detrac_MVI_20012.mp4
+dev_01_detrac_MVI_20011.mp4   # Đường hai hướng
+dev_02_detrac_MVI_20012.mp4   # Đường hai hướng
+dev_03_detrac_MVI_20034.mp4   # Đường hai hướng
+dev_04_4_corners.mp4           # Ngã tư / nhiều hướng
+dev_05_1_line.mp4              # Đường một hướng
 ```
+
+Các video development dùng để:
+
+- debug pipeline;
+- thử model và tracker;
+- thử single line, multiple lines / zones;
+- kiểm tra đếm theo một hướng, hai hướng và nhiều hướng.
+
+Các video này không dùng để báo cáo kết quả chính thức.
 
 ### `data/videos/evaluation/`
 
-Chứa video dùng cho đánh giá chính thức.
+Chứa các video dùng để chạy experiment và đánh giá kết quả chính thức.
 
-Ưu tiên:
-
-- một cảnh giao thông liên tục;
-- thời lượng khoảng 2–3 phút;
-- giữ cố định khi so sánh các cấu hình.
-
-Ví dụ:
+Hiện folder gồm:
 
 ```text
-eval_01_traffic_2m30s.mp4
-eval_02_traffic_2m45s.mp4
+eval_01_detrac_40131_40141.mp4   # Đường hai chiều
+eval_02.mp4                       # Nhiều hướng xe đi vào, có thể đếm bằng một counting line
+eval_03.mp4                       # Ngã tư / nhiều hướng
 ```
+
+Mục đích:
+
+- `eval_01`: kiểm tra tracking và counting trên đường hai chiều;
+- `eval_02`: kiểm tra trường hợp nhiều luồng xe nhưng vẫn có thể sử dụng một counting line;
+- `eval_03`: kiểm tra tình huống ngã tư phức tạp với nhiều hướng di chuyển.
+
+Các video evaluation được giữ cố định khi so sánh Detector, Tracker và Counting Strategy để đảm bảo kết quả công bằng.
+
+### Video storage
+
+Do GitHub không phù hợp để lưu nhiều file video dung lượng lớn, toàn bộ video development và evaluation được lưu trên Google Drive.
+
+Google Drive:
+
+https://drive.google.com/drive/folders/1IUK67TbJ1XqrTOKTAeIFHdr-xFzMsTXd?usp=sharing
+
+Cấu trúc:
+
+```text
+videos/
+├── development/
+│   ├── dev_01_detrac_MVI_20011.mp4
+│   ├── dev_02_detrac_MVI_20012.mp4
+│   ├── dev_03_detrac_MVI_20034.mp4
+│   ├── dev_04_4_corners.mp4
+│   └── dev_05_1_line.mp4
+│
+└── evaluation/
+    ├── eval_01_detrac_40131_40141.mp4
+    ├── eval_02.mp4
+    └── eval_03.mp4
+```
+
+Repository GitHub chỉ giữ cấu trúc thư mục và source code; video được tải từ Google Drive khi cần chạy project.
 
 Tóm lại:
 
@@ -283,7 +319,7 @@ eval_<number>_<description>.mp4
 Ví dụ:
 
 ```text
-eval_01_traffic_2m30s.mp4
+eval_01_detrac_40131_40141.mp4
 ```
 
 Output experiment:
