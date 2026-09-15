@@ -231,6 +231,3 @@ runs/
 # Local Ground Truth working state (final GT CSV/line configs remain trackable)
 data/ground_truth/*_manual_count_progress.json
 data/ground_truth/backups/
-# Local validation artifacts used while developing Statistics/Evaluation
-outputs/csv/validation_demo/
-outputs/charts/validation_demo/

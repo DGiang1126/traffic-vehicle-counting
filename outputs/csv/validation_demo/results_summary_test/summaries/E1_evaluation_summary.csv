@@ -1,0 +1,2 @@
+experiment,manual_total,system_total,signed_error,absolute_error,counting_accuracy_pct,mean_class_absolute_error,macro_class_accuracy_pct,time_mae
+E1,200,180,-20,20,90.0,4.0,88.0,3.2

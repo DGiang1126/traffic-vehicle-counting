@@ -1,0 +1,5 @@
+﻿experiment,detector,tracker,counting,fps,notes,manual_total,system_total,signed_error,absolute_error,counting_accuracy_pct,mean_class_absolute_error,macro_class_accuracy_pct,time_mae,source_summary
+dev01_perfect,YOLOv8n,ByteTrack,single_line,30.0,perfect_case,24,24,0,0,100.0,0.0,100.0,0.0,outputs/csv/validation_demo/dev01_perfect_evaluation_summary.csv
+dev01_class_swap,YOLOv8s,ByteTrack,single_line,24.0,class_error_case,24,24,0,0,100.0,0.4,47.8261,0.0,outputs/csv/validation_demo/dev01_class_swap_evaluation_summary.csv
+dev01_time_shift,YOLOv8s,BoT-SORT,single_line,20.0,time_error_case,24,24,0,0,100.0,0.0,100.0,0.6667,outputs/csv/validation_demo/dev01_time_shift_evaluation_summary.csv
+duc_anh_kiet_rule,YOLOv8n,ByteTrack,start_end_left_to_right,,counting_schema_case,8,8,0,0,100.0,0.0,100.0,0.0,outputs/csv/validation_demo/duc_anh_kiet_rule_evaluation_summary.csv

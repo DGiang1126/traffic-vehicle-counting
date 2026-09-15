@@ -1,0 +1,6 @@
+﻿time_bin,class,manual_count,system_count,signed_error,absolute_error,error_type,accuracy_pct
+minute_0,motorcycle,0,0,0,0,exact,100.0
+minute_0,car,23,23,0,0,exact,100.0
+minute_0,bus,0,0,0,0,exact,100.0
+minute_0,truck,1,1,0,0,exact,100.0
+minute_0,bicycle,0,0,0,0,exact,100.0

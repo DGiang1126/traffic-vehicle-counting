@@ -1,0 +1,9 @@
+timestamp,frame_index,track_id,class,line,direction,confidence
+1.042,25,1,car,line_1,negative_to_positive,0.9
+2.242,53,2,car,line_1,negative_to_positive,0.88
+4.042,97,3,motorcycle,line_1,negative_to_positive,0.81
+6.142,147,4,truck,line_1,negative_to_positive,0.86
+8.442,202,5,car,line_1,negative_to_positive,0.93
+10.042,241,6,bus,line_1,negative_to_positive,0.79
+12.242,293,7,bicycle,line_1,negative_to_positive,0.72
+13.842,332,8,motorcycle,line_1,negative_to_positive,0.84

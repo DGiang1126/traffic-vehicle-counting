@@ -1,0 +1,3 @@
+experiment,detector,tracker,counting,fps,evaluation_summary
+E1,YOLOv8n,ByteTrack,single_line,28.7,outputs/csv/validation_demo/results_summary_test/summaries/E1_evaluation_summary.csv
+E1,YOLOv8s,ByteTrack,single_line,22.4,outputs/csv/validation_demo/results_summary_test/summaries/E1_evaluation_summary.csv

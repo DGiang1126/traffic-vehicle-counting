@@ -1,0 +1,3 @@
+experiment,detector,tracker,counting,evaluation_summary
+dev01_perfect,YOLOv8n,ByteTrack,single_line,outputs/csv/validation_demo/dev01_perfect_evaluation_summary.csv
+dev01_time_shift,YOLOv8s,BoT-SORT,single_line,outputs/csv/validation_demo/dev01_time_shift_evaluation_summary.csv

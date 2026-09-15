@@ -1,0 +1,7 @@
+﻿experiment,detector,tracker,counting,fps,video_set,notes,manual_total,system_total,signed_error,absolute_error,counting_accuracy_pct,mean_class_absolute_error,macro_class_accuracy_pct,time_mae,source_summary
+E1,YOLOv8n,ByteTrack,single_line,28.7,eval_all,baseline,200,180,-20,20,90.0,4.0,88.0,3.2,outputs/csv/validation_demo/results_summary_test/summaries/E1_evaluation_summary.csv
+E2_n,YOLOv8n,ByteTrack,single_line,28.5,eval_all,detector_n,200,184,-16,16,92.0,3.2,90.0,2.8,outputs/csv/validation_demo/results_summary_test/summaries/E2_n_evaluation_summary.csv
+E2_s,YOLOv8s,ByteTrack,single_line,22.4,eval_all,detector_s,200,190,-10,10,95.0,2.0,94.0,1.7,outputs/csv/validation_demo/results_summary_test/summaries/E2_s_evaluation_summary.csv
+E2_m,YOLOv8m,ByteTrack,single_line,15.3,eval_all,detector_m,200,192,-8,8,96.0,1.6,95.0,1.4,outputs/csv/validation_demo/results_summary_test/summaries/E2_m_evaluation_summary.csv
+E3_bot,YOLOv8s,BoT-SORT,single_line,19.8,eval_all,tracker_test,200,194,-6,6,97.0,1.2,96.0,1.1,outputs/csv/validation_demo/results_summary_test/summaries/E3_bot_evaluation_summary.csv
+E5_custom,CustomDetector,CustomTracker,zone,,eval_all,extra_experiment,200,186,-14,14,93.0,2.8,91.0,,summaries/E5_custom_evaluation_summary.csv

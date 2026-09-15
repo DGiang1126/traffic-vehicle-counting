@@ -1,0 +1,3 @@
+﻿direction,motorcycle,car,bus,truck,bicycle,total
+negative_to_positive,0,2,0,0,0,2
+positive_to_negative,0,0,0,1,0,1

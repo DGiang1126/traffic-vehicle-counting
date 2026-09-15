@@ -1,0 +1,4 @@
+﻿timestamp,track_id,class,line,direction,confidence
+1.0,1,car,line_1,negative_to_positive,0.91
+2.0,2,car,line_1,negative_to_positive,0.92
+3.0,3,truck,line_2,positive_to_negative,0.88
