@@ -1,0 +1,30 @@
+{
+  "video": "dev_02_detrac_MVI_20012.mp4",
+  "video_path": "data\\videos\\development\\dev_02_detrac_MVI_20012.mp4",
+  "resolution": [
+    960,
+    540
+  ],
+  "confirmed": true,
+  "lines": [
+    {
+      "name": "line_1",
+      "start": [
+        288,
+        416
+      ],
+      "end": [
+        955,
+        411
+      ],
+      "start_normalized": [
+        0.3,
+        0.77037
+      ],
+      "end_normalized": [
+        0.994792,
+        0.761111
+      ]
+    }
+  ]
+}

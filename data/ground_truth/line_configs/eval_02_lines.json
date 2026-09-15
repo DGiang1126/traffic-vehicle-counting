@@ -1,0 +1,30 @@
+{
+  "video": "eval_02.mp4",
+  "video_path": "data\\videos\\evaluation\\eval_02.mp4",
+  "resolution": [
+    1918,
+    1076
+  ],
+  "confirmed": true,
+  "lines": [
+    {
+      "name": "line_1",
+      "start": [
+        66,
+        811
+      ],
+      "end": [
+        1744,
+        801
+      ],
+      "start_normalized": [
+        0.034411,
+        0.753717
+      ],
+      "end_normalized": [
+        0.909281,
+        0.744424
+      ]
+    }
+  ]
+}

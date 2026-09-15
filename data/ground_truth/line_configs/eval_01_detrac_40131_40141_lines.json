@@ -1,0 +1,49 @@
+{
+  "video": "eval_01_detrac_40131_40141.mp4",
+  "video_path": "data\\videos\\evaluation\\eval_01_detrac_40131_40141.mp4",
+  "resolution": [
+    960,
+    540
+  ],
+  "confirmed": true,
+  "lines": [
+    {
+      "name": "line_1",
+      "start": [
+        2,
+        276
+      ],
+      "end": [
+        493,
+        273
+      ],
+      "start_normalized": [
+        0.002083,
+        0.511111
+      ],
+      "end_normalized": [
+        0.513542,
+        0.505556
+      ]
+    },
+    {
+      "name": "line_2",
+      "start": [
+        959,
+        232
+      ],
+      "end": [
+        519,
+        234
+      ],
+      "start_normalized": [
+        0.998958,
+        0.42963
+      ],
+      "end_normalized": [
+        0.540625,
+        0.433333
+      ]
+    }
+  ]
+}

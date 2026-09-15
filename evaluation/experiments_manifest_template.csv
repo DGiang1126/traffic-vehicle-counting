@@ -1,0 +1,9 @@
+experiment,report_label,detector,tracker,counting,fps,evaluation_summary
+e1_baseline,E1,YOLOv8n,ByteTrack,single_line,,outputs/csv/e1_baseline_evaluation_summary.csv
+e2_yolov8n,E2_n,YOLOv8n,ByteTrack,single_line,,outputs/csv/e2_yolov8n_evaluation_summary.csv
+e2_yolov8s,E2_s,YOLOv8s,ByteTrack,single_line,,outputs/csv/e2_yolov8s_evaluation_summary.csv
+e2_yolov8m,E2_m,YOLOv8m,ByteTrack,single_line,,outputs/csv/e2_yolov8m_evaluation_summary.csv
+e3_bytetrack,E3_byte,BestDetector,ByteTrack,single_line,,outputs/csv/e3_bytetrack_evaluation_summary.csv
+e3_botsort,E3_bot,BestDetector,BoT-SORT,single_line,,outputs/csv/e3_botsort_evaluation_summary.csv
+e4_single_line,E4_single,BestDetector,BestTracker,single_line,,outputs/csv/e4_single_line_evaluation_summary.csv
+e4_multi_line,E4_multi,BestDetector,BestTracker,multi_line,,outputs/csv/e4_multi_line_evaluation_summary.csv

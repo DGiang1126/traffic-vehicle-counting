@@ -216,3 +216,21 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project-local raw data / model weights
+# Keep lightweight .gitkeep placeholders, but do not accidentally commit large files.
+data/datasets/**
+data/videos/**/*.mp4
+data/videos/**/*.avi
+data/videos/**/*.mov
+data/videos/**/*.mkv
+data/videos/**/*.m4v
+models/*.pt
+runs/
+
+# Local Ground Truth working state (final GT CSV/line configs remain trackable)
+data/ground_truth/*_manual_count_progress.json
+data/ground_truth/backups/
+# Local validation artifacts used while developing Statistics/Evaluation
+outputs/csv/validation_demo/
+outputs/charts/validation_demo/

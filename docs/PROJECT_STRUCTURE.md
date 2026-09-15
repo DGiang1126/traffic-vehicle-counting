@@ -43,6 +43,7 @@ traffic-vehicle-counting/
 │
 ├── requirements.txt
 ├── README.md
+├── KIET.md                 # bàn giao Statistics / Ground Truth / Evaluation
 └── .gitignore
 ```
 
@@ -93,7 +94,7 @@ Mục đích:
 - `eval_02`: kiểm tra trường hợp nhiều luồng xe nhưng vẫn có thể sử dụng một counting line;
 - `eval_03`: kiểm tra tình huống ngã tư phức tạp với nhiều hướng di chuyển.
 
-Các video evaluation được giữ cố định khi so sánh Detector, Tracker và Counting Strategy để đảm bảo kết quả công bằng.
+Ba video trên là evaluation set đã chuẩn bị và đã có Manual GT. Trước E1–E4, nhóm cần chốt dùng một video hay toàn bộ set; sau khi chốt thì video/set và time range phải được giữ cố định khi so sánh Detector, Tracker và Counting Strategy.
 
 ### Video storage
 
@@ -131,14 +132,20 @@ evaluation  → dùng để đo kết quả chính thức
 
 ### `data/ground_truth/`
 
-Chứa kết quả đếm thủ công tương ứng với evaluation video.
+Chứa Manual Ground Truth và line config dùng chung cho development/evaluation.
 
-Ví dụ:
+Cấu trúc hiện tại gồm:
 
 ```text
-eval_01_manual_counts.csv
-eval_02_manual_counts.csv
+data/ground_truth/
+├── line_configs/                         # source of truth cho START/END
+├── *_manual_counts_by_line.csv           # audit theo từng line
+├── *_manual_counts.csv                   # aggregate theo interval đã chọn
+├── *_manual_counts_by_10s.csv            # aggregate 10s khi dùng interval mặc định
+└── *_manual_counts_by_minute.csv         # aggregate theo phút
 ```
+
+Ba evaluation video hiện đã có GT đầy đủ: `eval_01_detrac_40131_40141`, `eval_02`, `eval_03`. File `*_manual_count_progress.json` là state local để resume và được `.gitignore` bỏ qua.
 
 ### `data/datasets/ua_detrac/`
 
@@ -220,15 +227,20 @@ Không đặt logic chính của Detection/Tracking/Counting trong folder này; 
 
 ## 6. `evaluation/`
 
-Chứa code đánh giá và bảng tổng hợp kết quả.
-
-Ví dụ:
+Chứa tool tạo Ground Truth, code đánh giá và bước tổng hợp nhiều experiment.
 
 ```text
 evaluation/
+├── manual_count_tool.py
 ├── evaluate_counting.py
-└── results_summary.csv
+├── build_results_summary.py
+├── experiments_manifest_template.csv
+└── results_summary.csv                  # sinh khi có kết quả official
 ```
+
+- `manual_count_tool.py`: setup line + manual count + resume.
+- `evaluate_counting.py`: so một System Statistics với Manual GT.
+- `build_results_summary.py`: gom nhiều `*_evaluation_summary.csv` theo manifest.
 
 ---
 
@@ -267,18 +279,24 @@ Biểu đồ dùng cho phân tích, báo cáo và slide.
 
 ## 8. `docs/`
 
-Chứa tài liệu nội bộ của project.
+Chứa tài liệu nội bộ và hướng dẫn vận hành.
 
 ```text
 docs/
 ├── PROJECT_PIPELINE.md
 ├── TEAM_TASKS.md
-└── PROJECT_STRUCTURE.md
+├── PROJECT_STRUCTURE.md
+├── EVALUATION_PROTOCOL.md
+├── MANUAL_GROUND_TRUTH_TOOL.md
+├── STATISTICS_EVALUATION_USAGE.md
+└── development_protocols/              # tài liệu trực quan dev + eval
 ```
 
-- `PROJECT_PIPELINE.md`: pipeline và kế hoạch experiment.
-- `TEAM_TASKS.md`: phân công công việc.
-- `PROJECT_STRUCTURE.md`: cấu trúc repository và quy ước lưu file.
+- `PROJECT_PIPELINE.md`, `TEAM_TASKS.md`: tài liệu kế hoạch/phân công gốc của nhóm.
+- `EVALUATION_PROTOCOL.md`: protocol hiện hành cho Manual GT và official evaluation.
+- `MANUAL_GROUND_TRUTH_TOOL.md`: cách tạo/resume GT.
+- `STATISTICS_EVALUATION_USAGE.md`: contract events → statistics → evaluation → summary.
+- `development_protocols/`: Markdown và ảnh để người đọc xem line trực quan; config chạy thật nằm trong `data/ground_truth/line_configs/`.
 
 ---
 

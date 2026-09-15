@@ -1,0 +1,4 @@
+line_id,start_x,start_y,end_x,end_y,start_sec,end_sec,motorcycle,car,bus,truck,bicycle
+line_1,304,412,947,409,0.0,10.0,0,10,0,0,0
+line_1,304,412,947,409,10.0,20.0,0,8,0,1,0
+line_1,304,412,947,409,20.0,26.56,0,5,0,0,0

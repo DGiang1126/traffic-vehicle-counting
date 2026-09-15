@@ -1,0 +1,49 @@
+{
+  "video": "dev_03_detrac_MVI_20034.mp4",
+  "video_path": "data\\videos\\development\\dev_03_detrac_MVI_20034.mp4",
+  "resolution": [
+    960,
+    540
+  ],
+  "confirmed": true,
+  "lines": [
+    {
+      "name": "line_1",
+      "start": [
+        8,
+        381
+      ],
+      "end": [
+        539,
+        379
+      ],
+      "start_normalized": [
+        0.008333,
+        0.705556
+      ],
+      "end_normalized": [
+        0.561458,
+        0.701852
+      ]
+    },
+    {
+      "name": "line_2",
+      "start": [
+        907,
+        190
+      ],
+      "end": [
+        552,
+        191
+      ],
+      "start_normalized": [
+        0.944792,
+        0.351852
+      ],
+      "end_normalized": [
+        0.575,
+        0.353704
+      ]
+    }
+  ]
+}
