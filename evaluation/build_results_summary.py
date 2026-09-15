@@ -30,6 +30,15 @@ NUMERIC_SUMMARY_COLUMNS = [
 ]
 
 
+def portable_path(path: Path) -> str:
+    """Return a portable project-relative path for CSV artifacts."""
+    path = path.resolve()
+    try:
+        return path.relative_to(PROJECT_ROOT.resolve()).as_posix()
+    except ValueError:
+        return path.name
+
+
 def resolve_summary_path(raw: str, manifest_path: Path) -> Path:
     """Resolve summary paths portably from project root or manifest directory."""
     path = Path(raw.strip())
@@ -126,7 +135,7 @@ def build_results(manifest_path: Path) -> pd.DataFrame:
         item = {column: manifest_row[column] for column in metadata_columns}
         for column in NUMERIC_SUMMARY_COLUMNS:
             item[column] = summary[column]
-        item["source_summary"] = str(manifest_row["evaluation_summary"])
+        item["source_summary"] = portable_path(summary_path)
         rows.append(item)
 
     result = pd.DataFrame(rows)

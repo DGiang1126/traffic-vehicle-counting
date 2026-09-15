@@ -88,6 +88,8 @@ Config của video mới được lưu tại:
 data/ground_truth/line_configs/<video_stem>_lines.json
 ```
 
+Các path được ghi vào JSON/progress đều dùng project-relative path (dùng `/`), không lưu đường dẫn tuyệt đối theo máy cá nhân.
+
 Nếu chỉ muốn setup/chỉnh line mà không manual-count, có thể chạy utility trực tiếp.
 
 Cú pháp:

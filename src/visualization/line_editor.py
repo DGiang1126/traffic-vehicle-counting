@@ -264,12 +264,18 @@ class GenericLineEditor:
                 cv2.destroyWindow(WINDOW_NAME)
                 return None
 
+def portable_path(path):
+    """Store project-relative paths in artifacts; never persist machine-specific absolute paths."""
+    path = Path(path).resolve()
+    try:
+        return path.relative_to(PROJECT_ROOT.resolve()).as_posix()
+    except ValueError:
+        return path.name
+
+
 def save_line_config(video_path, lines, info):
     CONFIG_DIR.mkdir(parents=True, exist_ok=True)
-    try:
-        stored_video_path = str(video_path.relative_to(PROJECT_ROOT))
-    except ValueError:
-        stored_video_path = str(video_path)
+    stored_video_path = portable_path(video_path)
     payload = {
         "video": video_path.name,
         "video_path": stored_video_path,

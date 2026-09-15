@@ -249,6 +249,6 @@ Mặc định output:
 evaluation/results_summary.csv
 ```
 
-Có thể đổi bằng `--output <path>`. Đường dẫn `evaluation_summary` có thể ghi relative từ project root (`outputs/...`) hoặc relative từ vị trí manifest. Script chặn duplicate experiment, summary trỏ nhầm experiment, file thiếu, schema thiếu và FPS không hợp lệ. Các cột metadata bổ sung trong manifest được giữ lại trong bảng tổng hợp.
+Có thể đổi bằng `--output <path>`. Đường dẫn `evaluation_summary` nên ghi relative từ project root (`outputs/...`) hoặc relative từ vị trí manifest. Khi ghi `source_summary` ra bảng kết quả, script chuẩn hóa về project-relative path và không lưu path tuyệt đối theo máy cá nhân. Script chặn duplicate experiment, summary trỏ nhầm experiment, file thiếu, schema thiếu và FPS không hợp lệ. Các cột metadata bổ sung trong manifest được giữ lại trong bảng tổng hợp.
 
 Hiện `build_results_summary.py` gom **mỗi row manifest từ một `*_evaluation_summary.csv`**; nó chưa tự aggregate nhiều video thành một experiment. Nếu official E1–E4 dùng cả 3 evaluation video, nhóm phải chốt cách aggregate trước rồi mới mở rộng bước tổng hợp này.

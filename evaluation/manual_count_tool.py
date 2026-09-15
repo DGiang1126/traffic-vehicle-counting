@@ -23,7 +23,7 @@ MAX_DISPLAY_H = 820
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.visualization.line_editor import choose_video_path, setup_lines
+from src.visualization.line_editor import choose_video_path, portable_path, setup_lines
 
 def get_video_info(video_path):
     cap = cv2.VideoCapture(str(video_path))
@@ -307,7 +307,7 @@ def new_progress(video_id, video_file, interval, line_config_path=None):
         "video_id": video_id,
         "video": video_file,
         "interval_sec": interval,
-        "line_config": str(line_config_path) if line_config_path else None,
+        "line_config": portable_path(line_config_path) if line_config_path else None,
         "counts": {},
     }
 
@@ -366,7 +366,7 @@ def main():
         progress = new_progress(video_stem, video_path.name, args.interval, config_path)
         changed_lines = sync_line_geometry(progress, lines)
         write_all_outputs(video_stem, lines, segments, progress, args.interval)
-    progress["line_config"] = str(config_path)
+    progress["line_config"] = portable_path(config_path)
     save_progress(progress_path, progress)
 
     print("\n=== MANUAL GROUND TRUTH TOOL ===")
