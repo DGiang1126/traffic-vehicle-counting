@@ -1,0 +1,28 @@
+{
+  "started_at": "2026-09-16T07:53:06+07:00",
+  "finished_at": "2026-09-16T07:56:06+07:00",
+  "code_version": "c9b2d3b82d3a",
+  "requested_run_name": "eval_01_detrac_40131_40141_single_20260916_075301_106350",
+  "run_name": "eval_01_detrac_40131_40141_single_20260916_075301_106350",
+  "input_video": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\runtime\\inputs\\eval_01_detrac_40131_40141.mp4",
+  "config": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\runtime\\configs\\eval_01_detrac_40131_40141_single_20260916_075301_106350.json",
+  "processed_frames": 3245,
+  "fps": 25.0,
+  "number_of_lines": 1,
+  "line_names": [
+    "Cong_chinh"
+  ],
+  "total_events": 80,
+  "config_snapshot": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\csv\\eval_01_detrac_40131_40141_single_20260916_075301_106350\\config_used.json",
+  "output_video": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\videos\\eval_01_detrac_40131_40141_single_20260916_075301_106350.mp4",
+  "browser_compatible_video": false,
+  "video_warning": "FFmpeg không chuyển được H.264 (lỗi không xác định); giữ video mp4v.",
+  "events_csv": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\csv\\eval_01_detrac_40131_40141_single_20260916_075301_106350_events.csv",
+  "summary_dir": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\csv\\eval_01_detrac_40131_40141_single_20260916_075301_106350",
+  "chart_dir": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\charts\\eval_01_detrac_40131_40141_single_20260916_075301_106350",
+  "charts": {
+    "by_class": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\charts\\eval_01_detrac_40131_40141_single_20260916_075301_106350\\count_by_class.png",
+    "by_time": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\charts\\eval_01_detrac_40131_40141_single_20260916_075301_106350\\traffic_flow_by_time.png",
+    "by_line": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\charts\\eval_01_detrac_40131_40141_single_20260916_075301_106350\\count_by_line.png"
+  }
+}

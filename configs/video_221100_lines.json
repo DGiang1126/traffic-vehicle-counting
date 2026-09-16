@@ -1,0 +1,30 @@
+{
+  "model": "yolov8n.pt",
+  "tracker": "bytetrack.yaml",
+  "confidence": 0.25,
+  "image_size": 960,
+  "statistics_interval_seconds": 60,
+  "vehicle_classes": [
+    "car",
+    "motorcycle",
+    "bus",
+    "truck",
+    "bicycle"
+  ],
+  "lines": [
+    {
+      "name": "line_1",
+      "start": [0.33, 0.86],
+      "end": [0.84, 0.72],
+      "negative_to_positive": "trên xuống dưới",
+      "positive_to_negative": "Dưới lên trên"
+    },
+    {
+      "name": "line_2",
+      "start": [0.20, 0.53],
+      "end": [0.28, 0.86],
+      "negative_to_positive": "Phải qua trái",
+      "positive_to_negative": "Trái qua phải"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "started_at": "2026-09-16T07:56:54+07:00",
+  "finished_at": "2026-09-16T08:01:39+07:00",
+  "code_version": "c9b2d3b82d3a",
+  "requested_run_name": "eval_03_multi_2lines_20260916_075654_566983",
+  "run_name": "eval_03_multi_2lines_20260916_075654_566983",
+  "input_video": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\runtime\\inputs\\eval_03.mp4",
+  "config": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\runtime\\configs\\eval_03_multi_2lines_20260916_075654_566983.json",
+  "processed_frames": 2968,
+  "fps": 24.04600499824192,
+  "number_of_lines": 2,
+  "line_names": [
+    "Cong_chinh",
+    "Nhanh_phu"
+  ],
+  "total_events": 62,
+  "config_snapshot": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\csv\\eval_03_multi_2lines_20260916_075654_566983\\config_used.json",
+  "output_video": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\videos\\eval_03_multi_2lines_20260916_075654_566983.mp4",
+  "browser_compatible_video": false,
+  "video_warning": "FFmpeg không chuyển được H.264 (lỗi không xác định); giữ video mp4v.",
+  "events_csv": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\csv\\eval_03_multi_2lines_20260916_075654_566983_events.csv",
+  "summary_dir": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\csv\\eval_03_multi_2lines_20260916_075654_566983",
+  "chart_dir": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\charts\\eval_03_multi_2lines_20260916_075654_566983",
+  "charts": {
+    "by_class": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\charts\\eval_03_multi_2lines_20260916_075654_566983\\count_by_class.png",
+    "by_time": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\charts\\eval_03_multi_2lines_20260916_075654_566983\\traffic_flow_by_time.png",
+    "by_line": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\charts\\eval_03_multi_2lines_20260916_075654_566983\\count_by_line.png"
+  }
+}

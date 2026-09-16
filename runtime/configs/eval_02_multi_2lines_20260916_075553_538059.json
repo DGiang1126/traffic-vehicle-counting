@@ -1,0 +1,49 @@
+{
+  "model": "yolov8n.pt",
+  "tracker": "bytetrack.yaml",
+  "confidence": 0.25,
+  "image_size": 960,
+  "vehicle_classes": [
+    "car",
+    "motorcycle",
+    "bus",
+    "truck",
+    "bicycle"
+  ],
+  "counting_lines": [
+    {
+      "name": "Cong_chinh",
+      "start": [
+        0.01564129301355579,
+        0.7592936802973977
+      ],
+      "end": [
+        0.9144942648592284,
+        0.8596654275092936
+      ],
+      "direction_vector": [
+        -0.06252245025498154,
+        0.9980435577739647
+      ],
+      "in_label": "DI_VAO",
+      "out_label": "DI_RA"
+    },
+    {
+      "name": "Nhanh_phu",
+      "start": [
+        0.7043795620437956,
+        0.36617100371747213
+      ],
+      "end": [
+        0.940563086548488,
+        0.7481412639405205
+      ],
+      "direction_vector": [
+        -0.6719400926365194,
+        0.7406055035628791
+      ],
+      "in_label": "VAO_NHANH",
+      "out_label": "RA_NHANH"
+    }
+  ]
+}

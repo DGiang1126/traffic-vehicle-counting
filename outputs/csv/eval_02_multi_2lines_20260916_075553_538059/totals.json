@@ -1,0 +1,11 @@
+{
+  "total_events": 208,
+  "events_csv": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\csv\\eval_02_multi_2lines_20260916_075553_538059_events.csv",
+  "summary_dir": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\csv\\eval_02_multi_2lines_20260916_075553_538059",
+  "chart_dir": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\charts\\eval_02_multi_2lines_20260916_075553_538059",
+  "charts": {
+    "by_class": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\charts\\eval_02_multi_2lines_20260916_075553_538059\\count_by_class.png",
+    "by_time": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\charts\\eval_02_multi_2lines_20260916_075553_538059\\traffic_flow_by_time.png",
+    "by_line": "D:\\lap_trinh\\mon_hoc\\TGMT\\project_nhom\\traffic-vehicle-counting\\outputs\\charts\\eval_02_multi_2lines_20260916_075553_538059\\count_by_line.png"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "model": "yolov8n.pt",
+  "tracker": "bytetrack.yaml",
+  "confidence": 0.25,
+  "image_size": 960,
+  "vehicle_classes": [
+    "car",
+    "motorcycle",
+    "bus",
+    "truck",
+    "bicycle"
+  ],
+  "counting_lines": [
+    {
+      "name": "Cong_chinh",
+      "start": [
+        0.959375,
+        0.8203703703703704
+      ],
+      "end": [
+        0.042708333333333334,
+        0.8277777777777777
+      ],
+      "direction_vector": [
+        -0.004545407589007119,
+        -0.9999896695815661
+      ],
+      "in_label": "DI_VAO",
+      "out_label": "DI_RA"
+    }
+  ]
+}

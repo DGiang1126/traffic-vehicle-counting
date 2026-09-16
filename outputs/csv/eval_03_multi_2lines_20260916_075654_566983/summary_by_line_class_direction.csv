@@ -1,0 +1,9 @@
+﻿line,class,direction,count
+Cong_chinh,car,DI_RA,14
+Cong_chinh,car,DI_VAO,18
+Cong_chinh,motorcycle,DI_VAO,11
+Cong_chinh,truck,DI_VAO,4
+Nhanh_phu,car,RA_NHANH,6
+Nhanh_phu,car,VAO_NHANH,6
+Nhanh_phu,truck,RA_NHANH,2
+Nhanh_phu,truck,VAO_NHANH,1
