@@ -1,0 +1,11 @@
+﻿tracker,class,ground_truth,prediction,absolute_error
+ByteTrack,car,178,173,5
+ByteTrack,motorcycle,2,0,2
+ByteTrack,bus,2,13,11
+ByteTrack,truck,17,15,2
+ByteTrack,bicycle,0,0,0
+BoT-SORT,car,178,173,5
+BoT-SORT,motorcycle,2,0,2
+BoT-SORT,bus,2,13,11
+BoT-SORT,truck,17,15,2
+BoT-SORT,bicycle,0,0,0

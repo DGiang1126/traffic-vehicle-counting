@@ -1,0 +1,16 @@
+﻿model,class,ground_truth,prediction,absolute_error
+YOLOv8n,car,178,147,31
+YOLOv8n,motorcycle,2,0,2
+YOLOv8n,bus,2,37,35
+YOLOv8n,truck,17,25,8
+YOLOv8n,bicycle,0,0,0
+YOLOv8s,car,178,172,6
+YOLOv8s,motorcycle,2,0,2
+YOLOv8s,bus,2,14,12
+YOLOv8s,truck,17,15,2
+YOLOv8s,bicycle,0,0,0
+YOLOv8m,car,178,170,8
+YOLOv8m,motorcycle,2,0,2
+YOLOv8m,bus,2,5,3
+YOLOv8m,truck,17,29,12
+YOLOv8m,bicycle,0,0,0

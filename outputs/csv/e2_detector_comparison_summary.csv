@@ -1,0 +1,4 @@
+﻿model,gt_total,pred_total,total_ae,total_count_accuracy,sum_class_ae,class_aware_accuracy,class_mae,processing_fps,processing_time_s
+YOLOv8n,199,209,10,94.97,76,61.81,15.2,16.79,320.01
+YOLOv8s,199,201,2,98.99,22,88.94,4.4,7.85,684.37
+YOLOv8m,199,204,5,97.49,25,87.44,5.0,3.4,1581.44
