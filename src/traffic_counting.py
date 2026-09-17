@@ -1,127 +1,283 @@
-#Code starter
-from pathlib import Path
+from __future__ import annotations
+
+import csv
+import json
 from collections import defaultdict
+from pathlib import Path
 
 import cv2
-import matplotlib.pyplot as plt
-from ultralytics import YOLO
+import torch
+
+from src.tracking.tracker import VehicleTracker
+from src.counting import LineDefinition, MultiLineCounter
+from src.statistics.statistics import run_statistics
+from evaluation.evaluate_counting import run_evaluation
 
 
 # ==========================================================
 # PROJECT PATHS
 # ==========================================================
 
-# traffic-vehicle-counting/
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-VIDEO_PATH = PROJECT_ROOT / "data" / "videos" / "traffic.mp4"
-MODEL_PATH = PROJECT_ROOT / "models" / "yolov8n.pt"
+VIDEO_PATH = (
+    PROJECT_ROOT
+    / "data"
+    / "videos"
+    / "evaluation"
+    / "eval_02.mp4"
+)
 
-CHART_OUTPUT_DIR = PROJECT_ROOT / "outputs" / "charts"
-CHART_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+MODEL_PATH = (
+    PROJECT_ROOT
+    / "models"
+    / "yolov8s.pt"
+)
 
-CHART_OUTPUT_PATH = CHART_OUTPUT_DIR / "traffic_stats.png"
+LINE_CONFIG_PATH = (
+    PROJECT_ROOT
+    / "data"
+    / "ground_truth"
+    / "line_configs"
+    / "eval_02_lines.json"
+)
+
+GROUND_TRUTH_PATH = (
+    PROJECT_ROOT
+    / "data"
+    / "ground_truth"
+    / "eval_02_manual_counts_by_10s.csv"
+)
+
+OUTPUT_CSV_DIR = PROJECT_ROOT / "outputs" / "csv"
+OUTPUT_CSV_DIR.mkdir(parents=True, exist_ok=True)
+
+EVENTS_PATH = (
+    OUTPUT_CSV_DIR
+    / "integration_eval02_events.csv"
+)
 
 
 # ==========================================================
-# VEHICLE CLASSES
+# EXPERIMENT SETTINGS
 # ==========================================================
 
-VEHICLE_CLASSES = {
-    "car",
-    "motorcycle",
-    "bus",
-    "truck",
-    "bicycle",
-}
+CONF_THRESHOLD = 0.2
+IOU_THRESHOLD = 0.7
+IMAGE_SIZE = 640
+
+TRACKER_TYPE = "bytetrack"
+
+# GT của Kiệt:
+# nhìn START -> END, chỉ đếm LEFT -> RIGHT.
+ALLOWED_DIRECTION = "negative_to_positive"
 
 
-def main(
-    video_path,
-    model_path,
-    line_y=400,
-):
+# ==========================================================
+# DEVICE
+# ==========================================================
 
-    # Load YOLO model
-    model = YOLO(str(model_path))
+if torch.cuda.is_available():
+    DEVICE = "cuda:0"
 
-    # Open video
-    cap = cv2.VideoCapture(str(video_path))
+    print("CUDA available: True")
+    print(
+        "GPU:",
+        torch.cuda.get_device_name(0),
+    )
+else:
+    DEVICE = "cpu"
+
+    print("CUDA available: False")
+    print("Dang chay bang CPU")
+
+
+# ==========================================================
+# LOAD COUNTING LINES
+# ==========================================================
+
+def load_counting_lines(
+    config_path: Path,
+) -> list[LineDefinition]:
+
+    with open(
+        config_path,
+        "r",
+        encoding="utf-8",
+    ) as file:
+        config = json.load(file)
+
+    lines = []
+
+    for item in config["lines"]:
+
+        line = LineDefinition(
+            name=item["name"],
+            start=tuple(item["start"]),
+            end=tuple(item["end"]),
+
+            negative_to_positive=(
+                "negative_to_positive"
+            ),
+
+            positive_to_negative=(
+                "positive_to_negative"
+            ),
+        )
+
+        lines.append(line)
+
+    return lines
+
+
+# ==========================================================
+# MAIN PIPELINE
+# ==========================================================
+
+def main():
+
+    # ======================================================
+    # TRACKER — THUẬN
+    # ======================================================
+
+    tracker = VehicleTracker(
+        model_path=MODEL_PATH,
+        tracker_type=TRACKER_TYPE,
+        conf=CONF_THRESHOLD,
+        iou=IOU_THRESHOLD,
+        imgsz=IMAGE_SIZE,
+    )
+
+    # đưa model lên GPU
+    tracker.model.to(DEVICE)
+
+    # ======================================================
+    # COUNTING — ĐỨC ANH
+    # ======================================================
+
+    lines = load_counting_lines(
+        LINE_CONFIG_PATH
+    )
+
+    counter = MultiLineCounter(
+        lines,
+        allowed_direction=ALLOWED_DIRECTION,
+    )
+
+    print("\nCounting lines:")
+
+    for line in lines:
+        print(
+            f"{line.name}: "
+            f"{line.start} -> {line.end}"
+        )
+
+    # ======================================================
+    # OPEN VIDEO
+    # ======================================================
+
+    cap = cv2.VideoCapture(
+        str(VIDEO_PATH)
+    )
 
     if not cap.isOpened():
         raise FileNotFoundError(
-            f"Khong mo duoc video: {video_path}"
+            f"Khong mo duoc video: {VIDEO_PATH}"
         )
 
-    # Các ID đã được đếm
-    counted_ids = set()
+    fps = cap.get(
+        cv2.CAP_PROP_FPS
+    )
 
-    # Số lượng theo class
+    if fps <= 0:
+        fps = 30.0
+
+    total_frames = int(
+        cap.get(
+            cv2.CAP_PROP_FRAME_COUNT
+        )
+    )
+
+    # ======================================================
+    # EVENT CSV
+    # ======================================================
+
+    event_file = open(
+        EVENTS_PATH,
+        "w",
+        newline="",
+        encoding="utf-8",
+    )
+
+    writer = csv.DictWriter(
+        event_file,
+        fieldnames=[
+            "timestamp",
+            "frame_index",
+            "track_id",
+            "class",
+            "line",
+            "direction",
+            "confidence",
+        ],
+    )
+
+    writer.writeheader()
+
+    # ======================================================
+    # COUNTERS FOR DISPLAY
+    # ======================================================
+
     class_counts = defaultdict(int)
 
-    # {track_id: last_cy}
-    track_history = {}
+    total_events = 0
 
-    while cap.isOpened():
+    frame_index = 0
 
-        ret, frame = cap.read()
+    # ======================================================
+    # PROCESS VIDEO
+    # ======================================================
 
-        if not ret:
-            break
+    try:
 
-        # ==================================================
-        # DETECTION + TRACKING
-        # ==================================================
+        while True:
 
-        results = model.track(
-            frame,
-            persist=True,
-            conf=0.2,
-            imgsz=960,
-            verbose=False,
-        )[0]
+            ret, frame = cap.read()
 
-        # ==================================================
-        # COUNTING LINE
-        # ==================================================
+            if not ret:
+                break
 
-        cv2.line(
-            frame,
-            (0, line_y),
-            (frame.shape[1], line_y),
-            (0, 0, 255),
-            2,
-        )
+            frame_index += 1
 
-        if results.boxes.id is not None:
+            # ==================================================
+            # TRACKING — THUẬN
+            # ==================================================
 
-            for box, track_id in zip(
-                results.boxes,
-                results.boxes.id,
-            ):
+            objects = tracker.track_frame(
+                frame,
+                frame_number=frame_index,
+                fps=fps,
+            )
 
-                # Class
-                cls_id = int(box.cls[0])
-                cls_name = model.names[cls_id]
+            # ==================================================
+            # VEHICLES
+            # ==================================================
 
-                if cls_name not in VEHICLE_CLASSES:
-                    continue
+            for obj in objects:
 
-                # Track ID
-                track_id = int(track_id)
+                # ----------------------------------------------
+                # DRAW BBOX
+                # ----------------------------------------------
 
-                # Bounding box
-                x1, y1, x2, y2 = map(
-                    int,
-                    box.xyxy[0],
+                x1 = int(obj.x1)
+                y1 = int(obj.y1)
+                x2 = int(obj.x2)
+                y2 = int(obj.y2)
+
+                center = (
+                    int(obj.center_x),
+                    int(obj.center_y),
                 )
-
-                # Center Y
-                cy = (y1 + y2) // 2
-
-                # ==================================================
-                # DRAW BOUNDING BOX
-                # ==================================================
 
                 cv2.rectangle(
                     frame,
@@ -131,10 +287,18 @@ def main(
                     2,
                 )
 
+                cv2.circle(
+                    frame,
+                    center,
+                    4,
+                    (0, 0, 255),
+                    -1,
+                )
+
                 cv2.putText(
                     frame,
-                    f"{cls_name} #{track_id}",
-                    (x1, y1 - 8),
+                    f"{obj.class_name} #{obj.track_id}",
+                    (x1, max(y1 - 8, 20)),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     0.5,
                     (0, 255, 0),
@@ -142,115 +306,259 @@ def main(
                 )
 
                 # ==================================================
-                # COUNT VEHICLE
+                # COUNTING — ĐỨC ANH
                 # ==================================================
 
-                last_cy = track_history.get(track_id)
+                new_events = counter.update(
+                    track_id=obj.track_id,
+                    center=center,
+                    class_name=obj.class_name,
+                    confidence=obj.confidence,
+                    timestamp=obj.timestamp,
+                    frame_index=obj.frame,
+                )
 
-                if (
-                    last_cy is not None
-                    and last_cy < line_y <= cy
-                    and track_id not in counted_ids
-                ):
-                    counted_ids.add(track_id)
+                # ==================================================
+                # SAVE COUNTING EVENTS
+                # ==================================================
 
-                    class_counts[cls_name] += 1
+                for event in new_events:
 
-                    print(
-                        f"COUNTED: {cls_name} "
-                        f"ID={track_id} | "
-                        f"Total={sum(class_counts.values())}"
+                    writer.writerow(
+                        event.to_dict()
                     )
 
-                track_history[track_id] = cy
+                    class_counts[
+                        event.class_name
+                    ] += 1
 
-        # ==================================================
-        # DISPLAY STATISTICS
-        # ==================================================
+                    total_events += 1
 
-        y_offset = 30
+                    print(
+                        f"COUNTED | "
+                        f"{event.class_name} | "
+                        f"ID={event.track_id} | "
+                        f"Line={event.line} | "
+                        f"Direction={event.direction} | "
+                        f"Total={total_events}"
+                    )
 
-        cv2.putText(
-            frame,
-            f"Total: {sum(class_counts.values())}",
-            (10, y_offset),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (255, 255, 0),
-            2,
-        )
+            # ==================================================
+            # DRAW COUNTING LINES
+            # ==================================================
 
-        for cls_name, count in class_counts.items():
+            for line in lines:
 
-            y_offset += 25
+                cv2.line(
+                    frame,
+                    line.start,
+                    line.end,
+                    (0, 0, 255),
+                    2,
+                )
+
+                cv2.putText(
+                    frame,
+                    line.name,
+                    line.start,
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.6,
+                    (0, 0, 255),
+                    2,
+                )
+
+            # ==================================================
+            # DISPLAY STATISTICS
+            # ==================================================
+
+            y_offset = 30
 
             cv2.putText(
                 frame,
-                f"{cls_name}: {count}",
+                f"Total: {total_events}",
                 (10, y_offset),
                 cv2.FONT_HERSHEY_SIMPLEX,
-                0.6,
+                0.7,
                 (255, 255, 0),
                 2,
             )
 
-        # ==================================================
-        # SHOW VIDEO
-        # ==================================================
+            for cls_name in [
+                "car",
+                "motorcycle",
+                "bus",
+                "truck",
+                "bicycle",
+            ]:
 
-        cv2.imshow(
-            "Traffic Counting - Press Q to quit",
-            frame,
-        )
+                y_offset += 25
 
-        if cv2.waitKey(1) & 0xFF == ord("q"):
-            break
+                cv2.putText(
+                    frame,
+                    (
+                        f"{cls_name}: "
+                        f"{class_counts[cls_name]}"
+                    ),
+                    (10, y_offset),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.6,
+                    (255, 255, 0),
+                    2,
+                )
+
+            cv2.putText(
+                frame,
+                (
+                    f"Frame: "
+                    f"{frame_index}/"
+                    f"{total_frames}"
+                ),
+                (10, y_offset + 30),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.55,
+                (255, 255, 255),
+                1,
+            )
+
+            # ==================================================
+            # SHOW
+            # ==================================================
+
+            cv2.imshow(
+                "Integrated Traffic Counting - Q to quit",
+                frame,
+            )
+
+            if (
+                cv2.waitKey(1)
+                & 0xFF
+                == ord("q")
+            ):
+                break
+
+    finally:
+
+        cap.release()
+
+        event_file.close()
+
+        cv2.destroyAllWindows()
 
     # ======================================================
-    # CLEANUP
+    # FINAL SYSTEM COUNT
     # ======================================================
 
-    cap.release()
-    cv2.destroyAllWindows()
+    print("\n" + "=" * 60)
+    print("INTEGRATION RESULT")
+    print("=" * 60)
 
-    # ======================================================
-    # SAVE CHART
-    # ======================================================
-
-    if class_counts:
-
-        plt.figure()
-
-        plt.bar(
-            class_counts.keys(),
-            class_counts.values(),
-        )
-
-        plt.title("Traffic Vehicle Statistics")
-        plt.xlabel("Vehicle Type")
-        plt.ylabel("Count")
-
-        plt.tight_layout()
-
-        plt.savefig(CHART_OUTPUT_PATH)
-
-        plt.close()
+    for cls_name in [
+        "car",
+        "motorcycle",
+        "bus",
+        "truck",
+        "bicycle",
+    ]:
 
         print(
-            f"\nDa luu bieu do tai: "
-            f"{CHART_OUTPUT_PATH}"
+            f"{cls_name:12s}: "
+            f"{class_counts[cls_name]}"
         )
 
+    print("-" * 60)
+
     print(
-        "\nKet qua dem cuoi cung:",
-        dict(class_counts),
+        "Total:",
+        total_events,
     )
 
+    print(
+        "Events CSV:",
+        EVENTS_PATH,
+    )
+
+    # ======================================================
+    # STATISTICS — KIỆT
+    # ======================================================
+
+    print("\nRunning statistics...")
+
+    statistics, statistic_paths = run_statistics(
+        EVENTS_PATH,
+
+        # GT Kiệt eval_02 được chia 10 giây
+        interval_seconds=10,
+
+        create_charts=True,
+    )
+
+    statistics_path = statistic_paths[
+        "by_class"
+    ]
+
+    system_by_time_path = statistic_paths[
+        "by_minute"
+    ]
+
+    print(
+        "Statistics:",
+        statistics_path,
+    )
+
+    # ======================================================
+    # EVALUATION — KIỆT
+    # ======================================================
+
+    print("\nRunning evaluation...")
+
+    evaluation_frames, evaluation_paths = (
+        run_evaluation(
+            ground_truth_path=GROUND_TRUTH_PATH,
+            system_statistics_path=statistics_path,
+            system_time_path=system_by_time_path,
+            experiment="integration_eval02",
+        )
+    )
+
+    summary = (
+        evaluation_frames[
+            "summary"
+        ].iloc[0]
+    )
+
+    print("\n" + "=" * 60)
+    print("EVALUATION")
+    print("=" * 60)
+
+    print(
+        "GT Total:",
+        int(summary["manual_total"]),
+    )
+
+    print(
+        "Pred Total:",
+        int(summary["system_total"]),
+    )
+
+    print(
+        "AE:",
+        int(summary["absolute_error"]),
+    )
+
+    print(
+        "Counting Accuracy:",
+        f"{summary['counting_accuracy_pct']:.2f}%",
+    )
+
+    print(
+        "Class MAE:",
+        f"{summary['mean_class_absolute_error']:.2f}",
+    )
+
+
+# ==========================================================
+# RUN
+# ==========================================================
 
 if __name__ == "__main__":
-
-    main(
-        video_path=VIDEO_PATH,
-        model_path=MODEL_PATH,
-        line_y=400,
-    )
+    main()

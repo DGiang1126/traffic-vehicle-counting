@@ -82,8 +82,8 @@ class MultiLineCounterTests(unittest.TestCase):
         common = {
             "name": "entrance",
             "direction_vector": (0, 1),
-            "forward_direction": "IN",
-            "reverse_direction": "OUT",
+            "in_label": "IN",
+            "out_label": "OUT",
         }
         normal = MultiLineCounter(
             [LineDefinition(start=(0, 100), end=(200, 100), **common)]
@@ -119,8 +119,8 @@ class MultiLineCounterTests(unittest.TestCase):
                     start=(0, 100),
                     end=(200, 100),
                     direction_vector=(0, 1),
-                    forward_direction="IN",
-                    reverse_direction="OUT",
+                    in_label="IN",
+                    out_label="OUT",
                 )
             ]
         )
