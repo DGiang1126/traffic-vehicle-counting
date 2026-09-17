@@ -1,0 +1,30 @@
+{
+  "video": "dev_05_1_line.mp4",
+  "video_path": "data/videos/development/dev_05_1_line.mp4",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "confirmed": true,
+  "lines": [
+    {
+      "name": "line_1",
+      "start": [
+        1562,
+        351
+      ],
+      "end": [
+        816,
+        351
+      ],
+      "start_normalized": [
+        0.813542,
+        0.325
+      ],
+      "end_normalized": [
+        0.425,
+        0.325
+      ]
+    }
+  ]
+}

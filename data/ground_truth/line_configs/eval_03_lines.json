@@ -1,0 +1,49 @@
+{
+  "video": "eval_03.mp4",
+  "video_path": "data/videos/evaluation/eval_03.mp4",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "confirmed": true,
+  "lines": [
+    {
+      "name": "line_1",
+      "start": [
+        1227,
+        549
+      ],
+      "end": [
+        1653,
+        780
+      ],
+      "start_normalized": [
+        0.639062,
+        0.508333
+      ],
+      "end_normalized": [
+        0.860938,
+        0.722222
+      ]
+    },
+    {
+      "name": "line_2",
+      "start": [
+        388,
+        619
+      ],
+      "end": [
+        1162,
+        546
+      ],
+      "start_normalized": [
+        0.202083,
+        0.573148
+      ],
+      "end_normalized": [
+        0.605208,
+        0.505556
+      ]
+    }
+  ]
+}

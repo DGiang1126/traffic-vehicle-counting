@@ -1,0 +1,87 @@
+{
+  "video": "dev_04_4_corners.mp4",
+  "video_path": "data/videos/development/dev_04_4_corners.mp4",
+  "resolution": [
+    1918,
+    1078
+  ],
+  "confirmed": true,
+  "lines": [
+    {
+      "name": "line_1",
+      "start": [
+        1652,
+        764
+      ],
+      "end": [
+        656,
+        907
+      ],
+      "start_normalized": [
+        0.861314,
+        0.70872
+      ],
+      "end_normalized": [
+        0.342023,
+        0.841373
+      ]
+    },
+    {
+      "name": "line_2",
+      "start": [
+        1284,
+        564
+      ],
+      "end": [
+        1649,
+        766
+      ],
+      "start_normalized": [
+        0.669447,
+        0.523191
+      ],
+      "end_normalized": [
+        0.85975,
+        0.710575
+      ]
+    },
+    {
+      "name": "line_3",
+      "start": [
+        451,
+        595
+      ],
+      "end": [
+        1086,
+        530
+      ],
+      "start_normalized": [
+        0.235141,
+        0.551948
+      ],
+      "end_normalized": [
+        0.566215,
+        0.491651
+      ]
+    },
+    {
+      "name": "line_4",
+      "start": [
+        599,
+        900
+      ],
+      "end": [
+        445,
+        596
+      ],
+      "start_normalized": [
+        0.312304,
+        0.834879
+      ],
+      "end_normalized": [
+        0.232013,
+        0.552876
+      ]
+    }
+  ]
+}
