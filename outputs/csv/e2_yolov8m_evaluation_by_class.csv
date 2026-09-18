@@ -1,0 +1,7 @@
+﻿class,manual_count,system_count,signed_error,absolute_error,error_type,accuracy_pct
+motorcycle,2,0,-2,2,undercount,0.0
+car,178,170,-8,8,undercount,95.5056
+bus,2,5,3,3,overcount,-50.0
+truck,17,29,12,12,overcount,29.4118
+bicycle,0,0,0,0,exact,100.0
+TOTAL,199,204,5,5,overcount,97.4874

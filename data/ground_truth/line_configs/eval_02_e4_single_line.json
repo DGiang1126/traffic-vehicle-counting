@@ -1,0 +1,20 @@
+{
+    "video": "eval_02.mp4",
+    "frame_width": 1918,
+    "frame_height": 1076,
+    "lines": [
+        {
+            "name": "Cong_chinh",
+            "start": [
+                66,
+                811
+            ],
+            "end": [
+                1744,
+                801
+            ],
+            "negative_to_positive": "negative_to_positive",
+            "positive_to_negative": "positive_to_negative"
+        }
+    ]
+}

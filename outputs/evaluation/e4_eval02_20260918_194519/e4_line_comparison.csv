@@ -1,0 +1,4 @@
+﻿strategy,line,gt_total,pred_total,absolute_error,accuracy_pct,gt_car,pred_car,gt_motorcycle,pred_motorcycle,gt_bus,pred_bus,gt_truck,pred_truck,gt_bicycle,pred_bicycle,class_mae
+single_line,Cong_chinh,199,201,2,98.99497487437185,178,172,2,0,2,14,17,15,0,0,4.4
+multi_line,Cong_chinh,180,182,2,98.88888888888889,161,153,2,0,2,5,15,24,0,0,4.4
+multi_line,Nhanh_phu,19,19,0,100.0,17,16,0,0,0,0,2,3,0,0,0.4

@@ -1,0 +1,9 @@
+﻿experiment,report_label,detector,tracker,counting,fps,manual_total,system_total,signed_error,absolute_error,counting_accuracy_pct,mean_class_absolute_error,macro_class_accuracy_pct,time_mae,source_summary
+e1_baseline,E1,YOLOv8n,ByteTrack,single_line,16.79,199,209,10,10,94.9749,15.2,-378.6186,1.1111,outputs/csv/e1_baseline_evaluation_summary.csv
+e2_yolov8n,E2_n,YOLOv8n,ByteTrack,single_line,16.79,199,209,10,10,94.9749,15.2,-378.6186,1.1111,outputs/csv/e2_yolov8n_evaluation_summary.csv
+e2_yolov8s,E2_s,YOLOv8s,ByteTrack,single_line,7.85,199,201,2,2,98.995,4.4,-78.7839,0.6667,outputs/csv/e2_yolov8s_evaluation_summary.csv
+e2_yolov8m,E2_m,YOLOv8m,ByteTrack,single_line,3.4,199,204,5,5,97.4874,5.0,18.7294,0.5,outputs/csv/e2_yolov8m_evaluation_summary.csv
+e3_bytetrack,E3_byte,YOLOv8s,ByteTrack,single_line,6.75,199,201,2,2,98.995,4.0,-66.1434,0.6667,outputs/csv/e3_bytetrack_evaluation_summary.csv
+e3_botsort,E3_bot,YOLOv8s,BoT-SORT,single_line,6.0,199,201,2,2,98.995,4.0,-66.1434,0.6667,outputs/csv/e3_botsort_evaluation_summary.csv
+e4_eval02_single_line,E4_single,YOLOv8s,ByteTrack,single_line,,199,201,2,2,98.995,4.4,-78.7839,,outputs/evaluation/e4_eval02_20260918_194519/single_line/evaluation/e4_eval02_single_line_evaluation_summary.csv
+e4_eval02_multi_line,E4_multi,YOLOv8s,ByteTrack,multi_line,,199,201,2,2,98.995,4.8,21.5301,,outputs/evaluation/e4_eval02_20260918_194519/multi_line/evaluation/e4_eval02_multi_line_evaluation_summary.csv

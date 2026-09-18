@@ -1,0 +1,33 @@
+{
+    "video": "eval_02.mp4",
+    "frame_width": 1918,
+    "frame_height": 1076,
+    "lines": [
+        {
+            "name": "Cong_chinh",
+            "start": [
+                88,
+                923
+            ],
+            "end": [
+                1112,
+                930
+            ],
+            "negative_to_positive": "negative_to_positive",
+            "positive_to_negative": "positive_to_negative"
+        },
+        {
+            "name": "Nhanh_phu",
+            "start": [
+                1250,
+                49
+            ],
+            "end": [
+                1756,
+                689
+            ],
+            "negative_to_positive": "negative_to_positive",
+            "positive_to_negative": "positive_to_negative"
+        }
+    ]
+}

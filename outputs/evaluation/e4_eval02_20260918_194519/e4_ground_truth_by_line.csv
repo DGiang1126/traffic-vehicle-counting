@@ -1,0 +1,4 @@
+﻿strategy,line,car,motorcycle,bus,truck,bicycle,total
+single_line,single_line,178,2,2,17,0,199
+multi_line,Cong_chinh,161,2,2,15,0,180
+multi_line,Nhanh_phu,17,0,0,2,0,19

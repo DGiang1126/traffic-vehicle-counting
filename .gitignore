@@ -216,3 +216,18 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+*.pt
+
+@"
+
+# Local videos / temporary review assets
+data/videos/**/*.mp4
+data/videos/**/node_modules/
+data/videos/evaluation/frames/
+data/videos/evaluation/review*/
+data/videos/evaluation/*.mjs
+
+# Generated demo videos
+outputs/evaluation/**/*.mp4
+"@ | Add-Content .gitignore

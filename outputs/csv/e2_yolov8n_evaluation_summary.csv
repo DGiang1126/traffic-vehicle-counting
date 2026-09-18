@@ -1,0 +1,2 @@
+﻿experiment,manual_total,system_total,signed_error,absolute_error,counting_accuracy_pct,mean_class_absolute_error,macro_class_accuracy_pct,time_mae
+e2_yolov8n,199,209,10,10,94.9749,15.2,-378.6186,1.1111

@@ -1,0 +1,2 @@
+﻿experiment,manual_total,system_total,signed_error,absolute_error,counting_accuracy_pct,mean_class_absolute_error,macro_class_accuracy_pct,time_mae
+e3_botsort,199,201,2,2,98.995,4.0,-66.1434,0.6667

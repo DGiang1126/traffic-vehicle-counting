@@ -1,0 +1,35 @@
+{
+  "experiment": "E4",
+  "video": "D:\\HK1_IUH_22646851_Final\\TGMT\\BaiTapThuyetTrinh\\traffic-vehicle-counting\\data\\videos\\evaluation\\eval_02.mp4",
+  "model": "D:\\HK1_IUH_22646851_Final\\TGMT\\BaiTapThuyetTrinh\\traffic-vehicle-counting\\models\\yolov8s.pt",
+  "tracker": "bytetrack",
+  "confidence": 0.2,
+  "iou": 0.7,
+  "image_size": 640,
+  "allowed_direction": "negative_to_positive",
+  "ground_truth_total": 199,
+  "single_line": {
+    "strategy": "single_line",
+    "number_of_lines": 1,
+    "gt_total": 199,
+    "pred_total": 201,
+    "absolute_error": 2,
+    "counting_accuracy_pct": 98.995,
+    "class_mae": 4.4,
+    "macro_class_accuracy_pct": -78.7839,
+    "events_csv": "D:\\HK1_IUH_22646851_Final\\TGMT\\BaiTapThuyetTrinh\\traffic-vehicle-counting\\outputs\\evaluation\\e4_eval02_20260918_194519\\single_line\\e4_eval02_single_line_events.csv",
+    "statistics_csv": "D:\\HK1_IUH_22646851_Final\\TGMT\\BaiTapThuyetTrinh\\traffic-vehicle-counting\\outputs\\evaluation\\e4_eval02_20260918_194519\\single_line\\statistics\\e4_eval02_single_line_statistics.csv"
+  },
+  "multi_line": {
+    "strategy": "multi_line",
+    "number_of_lines": 2,
+    "gt_total": 199,
+    "pred_total": 201,
+    "absolute_error": 2,
+    "counting_accuracy_pct": 98.995,
+    "class_mae": 4.8,
+    "macro_class_accuracy_pct": 21.5301,
+    "events_csv": "D:\\HK1_IUH_22646851_Final\\TGMT\\BaiTapThuyetTrinh\\traffic-vehicle-counting\\outputs\\evaluation\\e4_eval02_20260918_194519\\multi_line\\e4_eval02_multi_line_events.csv",
+    "statistics_csv": "D:\\HK1_IUH_22646851_Final\\TGMT\\BaiTapThuyetTrinh\\traffic-vehicle-counting\\outputs\\evaluation\\e4_eval02_20260918_194519\\multi_line\\statistics\\e4_eval02_multi_line_statistics.csv"
+  }
+}
