@@ -4,9 +4,9 @@
     "frame_height": 1076,
     "lines": [
         {
-            "name": "Cong_chinh",
+            "name": "Line 1",
             "start": [
-                88,
+                20,
                 923
             ],
             "end": [
@@ -17,14 +17,14 @@
             "positive_to_negative": "positive_to_negative"
         },
         {
-            "name": "Nhanh_phu",
+            "name": "Line 2",
             "start": [
-                1250,
-                49
+                1325,
+                500
             ],
             "end": [
                 1756,
-                689
+                800
             ],
             "negative_to_positive": "negative_to_positive",
             "positive_to_negative": "positive_to_negative"

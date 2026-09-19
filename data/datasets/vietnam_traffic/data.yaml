@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 5
+names: ['bicycle', 'bus', 'car', 'motorcycle', 'truck']
+
+roboflow:
+  workspace: dong-giang-do
+  project: vn-traffic-vehicle-detection
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/dong-giang-do/vn-traffic-vehicle-detection/dataset/3
